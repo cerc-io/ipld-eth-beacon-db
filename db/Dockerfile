@@ -18,6 +18,6 @@ WORKDIR /app
 COPY --from=builder /go/src/github.com/vulcanize/ipld-ethcl-db/scripts/startup_script.sh .
 
 COPY --from=builder /go/src/github.com/pressly/goose/cmd/goose/goose goose
-COPY --from=builder /go/src/github.com/vulcanize/ipld-eth-db/db/migrations migrations/vulcanizedb
+COPY --from=builder /go/src/github.com/vulcanize/ipld-ethcl-db/db/migrations migrations/vulcanizedb
 
 ENTRYPOINT ["/app/startup_script.sh"]
