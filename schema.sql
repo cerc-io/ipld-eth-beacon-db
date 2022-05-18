@@ -136,14 +136,14 @@ CREATE UNIQUE INDEX beacon_state_mh_index ON ethcl.beacon_state USING btree (mh_
 --
 
 ALTER TABLE ONLY ethcl.signed_beacon_block
-    ADD CONSTRAINT signed_beacon_block_mh_key_fkey (mh_key) REFERENCES public.blocks(key) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+    ADD CONSTRAINT signed_beacon_block_mh_key_fkey FOREIGN KEY (mh_key) REFERENCES public.blocks(key) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
 
 --
 -- Name: slots signed_beacon_block_slot_fkey; Type: FK CONSTRAINT; Schema: eth; Owner: -
 --
 
 ALTER TABLE ONLY ethcl.signed_beacon_block
-  ADD CONSTRAINT signed_beacon_block_slot_fkey (slot, block_root) REFERENCES ethcl.slots(slot, block_root) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+  ADD CONSTRAINT signed_beacon_block_slot_fkey FOREIGN KEY (slot, block_root) REFERENCES ethcl.slots(slot, block_root) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
 
 --
 -- Name: slots beacon_state_mh_key_fkey; Type: FK CONSTRAINT; Schema: eth; Owner: -
@@ -157,4 +157,4 @@ ALTER TABLE ONLY ethcl.beacon_state
 --
 
 ALTER TABLE ONLY ethcl.beacon_state
-  ADD CONSTRAINT beacon_state_slot_fkey (slot, state_root) REFERENCES ethcl.slots(slot, state_root) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+  ADD CONSTRAINT beacon_state_slot_fkey FOREIGN KEY (slot, state_root) REFERENCES ethcl.slots(slot, state_root) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
