@@ -91,6 +91,13 @@ ALTER TABLE ONLY ethcl.slots
     ADD CONSTRAINT slots_pkey PRIMARY KEY (slot, block_root);
 
 --
+-- Name: slots unique_slot_state_root; Type: CONSTRAINT; Schema: ethcl; Owner: -
+--
+
+ALTER TABLE ONLY ethcl.slots
+    ADD CONSTRAINT unique_slot_state_root UNIQUE (slot, state_root);
+
+--
 -- Name: slots signed_beacon_block_pkey; Type: CONSTRAINT; Schema: ethcl; Owner: -
 --
 
