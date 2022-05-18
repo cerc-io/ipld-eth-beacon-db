@@ -2,7 +2,7 @@
 -- +goose Up
 CREATE TABLE ethcl.signed_beacon_block(
   slot bigint NOT NULL,
-  block_root VARCHAR(66) UNIQUE,
+  block_root VARCHAR(66),
   parent_block_root VARCHAR(66),
   eth1_block_hash VARCHAR(66),
   mh_key text NOT NULL,
