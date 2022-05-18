@@ -5,8 +5,9 @@ CREATE TABLE ethcl.slots (
   block_root VARCHAR(66),
   state_root VARCHAR(66),
   status text NOT NULL,
-  UNIQUE (slot, state_root),
-  PRIMARY KEY (slot, block_root)
+  UNIQUE (state_root, slot),
+  INDEX slots_slot_index ON ethcl.slots USING brin (slot),
+  PRIMARY KEY (block_root, slot)
 );
 
 -- +goose Down

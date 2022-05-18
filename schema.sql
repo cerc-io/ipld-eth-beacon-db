@@ -88,28 +88,28 @@ CREATE TABLE public.blocks (
 --
 
 ALTER TABLE ONLY ethcl.slots
-    ADD CONSTRAINT slots_pkey PRIMARY KEY (slot, block_root);
+    ADD CONSTRAINT slots_pkey PRIMARY KEY (block_root, slot);
 
 --
 -- Name: slots unique_slot_state_root; Type: CONSTRAINT; Schema: ethcl; Owner: -
 --
 
 ALTER TABLE ONLY ethcl.slots
-    ADD CONSTRAINT unique_slot_state_root UNIQUE (slot, state_root);
+    ADD CONSTRAINT unique_slot_state_root UNIQUE (state_root, slot);
 
 --
 -- Name: slots signed_beacon_block_pkey; Type: CONSTRAINT; Schema: ethcl; Owner: -
 --
 
 ALTER TABLE ONLY ethcl.signed_beacon_block
-    ADD CONSTRAINT signed_beacon_block_pkey PRIMARY KEY (slot, block_root);
+    ADD CONSTRAINT signed_beacon_block_pkey PRIMARY KEY (block_root, slot);
 
 --
 -- Name: slots beacon_state_pkey; Type: CONSTRAINT; Schema: ethcl; Owner: -
 --
 
 ALTER TABLE ONLY ethcl.beacon_state
-    ADD CONSTRAINT beacon_state_pkey PRIMARY KEY (slot, state_root);
+    ADD CONSTRAINT beacon_state_pkey PRIMARY KEY (state_root, slot);
 
 --
 -- Name: slots known_gaps; Type: CONSTRAINT; Schema: ethcl; Owner: -
@@ -126,10 +126,22 @@ ALTER TABLE ONLY public.blocks
     ADD CONSTRAINT blocks_pkey PRIMARY KEY (key);
 
 --
--- Name: beacon_state_mh_index; Type: INDEX; Schema: eth; Owner: -
+-- Name: slots_slot_index; Type: INDEX; Schema: eth; Owner: -
 --
 
-CREATE UNIQUE INDEX beacon_state_mh_index ON ethcl.beacon_state USING btree (mh_key);
+CREATE INDEX slots_slot_index ON ethcl.slots USING brin (slot);
+
+--
+-- Name: signed_beacon_block_slot_index; Type: INDEX; Schema: eth; Owner: -
+--
+
+CREATE INDEX signed_beacon_block_slot_index ON ethcl.signed_beacon_block USING brin (slot);
+
+--
+-- Name: beacon_state_slot_index; Type: INDEX; Schema: eth; Owner: -
+--
+
+CREATE INDEX beacon_state_slot_index ON ethcl.beacon_state USING brin (slot);
 
 --
 -- Name: slots signed_beacon_block_mh_key_fkey; Type: FK CONSTRAINT; Schema: eth; Owner: -
@@ -143,7 +155,7 @@ ALTER TABLE ONLY ethcl.signed_beacon_block
 --
 
 ALTER TABLE ONLY ethcl.signed_beacon_block
-  ADD CONSTRAINT signed_beacon_block_slot_fkey FOREIGN KEY (slot, block_root) REFERENCES ethcl.slots(slot, block_root) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+  ADD CONSTRAINT signed_beacon_block_slot_fkey FOREIGN KEY (block_root, slot) REFERENCES ethcl.slots(block_root, slot) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
 
 --
 -- Name: slots beacon_state_mh_key_fkey; Type: FK CONSTRAINT; Schema: eth; Owner: -
@@ -157,4 +169,4 @@ ALTER TABLE ONLY ethcl.beacon_state
 --
 
 ALTER TABLE ONLY ethcl.beacon_state
-  ADD CONSTRAINT beacon_state_slot_fkey FOREIGN KEY (slot, state_root) REFERENCES ethcl.slots(slot, state_root) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+  ADD CONSTRAINT beacon_state_slot_fkey FOREIGN KEY (state_root, slot) REFERENCES ethcl.slots(state_root, slot) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
