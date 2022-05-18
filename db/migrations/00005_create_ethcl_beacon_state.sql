@@ -10,5 +10,7 @@ CREATE TABLE ethcl.beacon_state(
   PRIMARY KEY (state_root, slot)
 );
 
+CREATE INDEX beacon_state_slot_index ON ethcl.beacon_state USING brin (slot);
+
 -- +goose Down
 DROP TABLE ethcl.beacon_state;
