@@ -33,8 +33,8 @@ SET default_table_access_method = heap;
 CREATE TABLE ethcl.slots(
     epoch bigint NOT NULL,
     slot bigint NOT NULL,
-    block_root VARCHAR(66) UNIQUE,
-    state_root VARCHAR(66) UNIQUE,
+    block_root VARCHAR(66),
+    state_root VARCHAR(66),
     status text NOT NULL
 );
 
@@ -44,7 +44,7 @@ CREATE TABLE ethcl.slots(
 
 CREATE TABLE ethcl.signed_beacon_block(
     slot bigint NOT NULL,
-    block_root VARCHAR(66) UNIQUE,
+    block_root VARCHAR(66),
     parent_block_root VARCHAR(66),
     eth1_block_hash VARCHAR(66),
     mh_key text NOT NULL
@@ -56,7 +56,7 @@ CREATE TABLE ethcl.signed_beacon_block(
 
 CREATE TABLE ethcl.beacon_state(
     slot bigint NOT NULL,
-    state_root VARCHAR(66) UNIQUE,
+    state_root VARCHAR(66),
     mh_key text NOT NULL
 );
 
@@ -129,7 +129,14 @@ CREATE UNIQUE INDEX beacon_state_mh_index ON ethcl.beacon_state USING btree (mh_
 --
 
 ALTER TABLE ONLY ethcl.signed_beacon_block
-    ADD CONSTRAINT signed_beacon_block_mh_key_fkey FOREIGN KEY (mh_key) REFERENCES public.blocks(key) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+    ADD CONSTRAINT signed_beacon_block_mh_key_fkey (mh_key) REFERENCES public.blocks(key) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+
+--
+-- Name: slots signed_beacon_block_slot_fkey; Type: FK CONSTRAINT; Schema: eth; Owner: -
+--
+
+ALTER TABLE ONLY ethcl.signed_beacon_block
+  ADD CONSTRAINT signed_beacon_block_slot_fkey (slot, block_root) REFERENCES ethcl.slots(slot, block_root) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
 
 --
 -- Name: slots beacon_state_mh_key_fkey; Type: FK CONSTRAINT; Schema: eth; Owner: -
@@ -137,3 +144,10 @@ ALTER TABLE ONLY ethcl.signed_beacon_block
 
 ALTER TABLE ONLY ethcl.beacon_state
     ADD CONSTRAINT beacon_state_mh_key_fkey FOREIGN KEY (mh_key) REFERENCES public.blocks(key) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+
+--
+-- Name: slots beacon_state_slot_fkey; Type: FK CONSTRAINT; Schema: eth; Owner: -
+--
+
+ALTER TABLE ONLY ethcl.beacon_state
+  ADD CONSTRAINT beacon_state_slot_fkey (slot, state_root) REFERENCES ethcl.slots(slot, state_root) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
