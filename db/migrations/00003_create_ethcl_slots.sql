@@ -6,7 +6,7 @@ CREATE TABLE ethcl.slots (
   state_root VARCHAR(66),
   status text NOT NULL,
   UNIQUE (state_root, slot),
-  CREATE INDEX USING brin (slot),
+  INDEX USING brin (slot),
   PRIMARY KEY (block_root, slot)
 );
 

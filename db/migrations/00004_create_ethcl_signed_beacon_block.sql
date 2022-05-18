@@ -8,7 +8,7 @@ CREATE TABLE ethcl.signed_beacon_block(
   mh_key text NOT NULL,
   FOREIGN KEY (block_root, slot) REFERENCES ethcl.slots(block_root, slot) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
   FOREIGN KEY (mh_key) REFERENCES public.blocks(key) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
-  CREATE INDEX USING brin (slot),
+  INDEX USING brin (slot),
   PRIMARY KEY (block_root, slot)
 );
 
