@@ -10,7 +10,7 @@ CREATE TABLE ethcl.beacon_state(
 );
 
 CREATE INDEX beacon_state_slot_index ON ethcl.beacon_state USING brin (slot);
-CREATE UNIQUE INDEX beacon_state_mh_index ON ethcl.beacon_state USING btree (mh_key);
+CREATE INDEX beacon_state_mh_index ON ethcl.beacon_state USING btree (mh_key);
 
 -- +goose Down
 DROP TABLE ethcl.beacon_state;

@@ -147,13 +147,13 @@ CREATE INDEX beacon_state_slot_index ON ethcl.beacon_state USING brin (slot);
 -- Name: signed_beacon_block_mh_index; Type: INDEX; Schema: eth; Owner: -
 --
 
-CREATE UNIQUE INDEX signed_beacon_block_mh_index ON ethcl.signed_beacon_block USING btree (mh_key);
+CREATE INDEX signed_beacon_block_mh_index ON ethcl.signed_beacon_block USING btree (mh_key);
 
 --
 -- Name: beacon_state_mh_index; Type: INDEX; Schema: eth; Owner: -
 --
 
-CREATE UNIQUE INDEX beacon_state_mh_index ON ethcl.beacon_state USING btree (mh_key);
+CREATE INDEX beacon_state_mh_index ON ethcl.beacon_state USING btree (mh_key);
 
 --
 -- Name: slots signed_beacon_block_mh_key_fkey; Type: FK CONSTRAINT; Schema: eth; Owner: -
