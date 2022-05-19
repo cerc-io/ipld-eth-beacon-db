@@ -12,6 +12,7 @@ CREATE TABLE ethcl.signed_beacon_block(
 );
 
 CREATE INDEX signed_beacon_block_slot_index ON ethcl.signed_beacon_block USING brin (slot);
+CREATE UNIQUE INDEX signed_beacon_block_mh_index ON ethcl.signed_beacon_block USING btree (mh_key);
 
 -- +goose Down
 DROP TABLE ethcl.signed_beacon_block;
