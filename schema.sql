@@ -75,6 +75,18 @@ CREATE TABLE ethcl.known_gaps (
 );
 
 --
+-- Name: historic_process; Type: TABLE; Schema: ethcl; Owner: -
+--
+
+CREATE TABLE ethcl.historic_process (
+  start_slot bigint NOT NULL,
+  end_slot bigint NOT NULL,
+  checked_out boolean DEFAULT false NOT NULL,
+  entry_time timestamp without time zone DEFAULT (now() at time zone 'utc'),
+  priority int DEFAULT 10
+);
+
+--
 -- Name: blocks; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -112,11 +124,18 @@ ALTER TABLE ONLY ethcl.beacon_state
     ADD CONSTRAINT beacon_state_pkey PRIMARY KEY (state_root, slot);
 
 --
--- Name: slots known_gaps; Type: CONSTRAINT; Schema: ethcl; Owner: -
+-- Name: slots known_gaps_pkey; Type: CONSTRAINT; Schema: ethcl; Owner: -
 --
 
 ALTER TABLE ONLY ethcl.known_gaps
     ADD CONSTRAINT known_gaps_pkey PRIMARY KEY (start_slot, end_slot);
+
+--
+-- Name: slots historic_process_pkey; Type: CONSTRAINT; Schema: ethcl; Owner: -
+--
+
+ALTER TABLE ONLY ethcl.historic_process
+    ADD CONSTRAINT historic_process_pkey PRIMARY KEY (start_slot, end_slot);
 
 --
 -- Name: blocks blocks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
