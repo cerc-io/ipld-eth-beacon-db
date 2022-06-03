@@ -68,6 +68,7 @@ CREATE TABLE ethcl.known_gaps (
   start_slot bigint NOT NULL,
   end_slot bigint NOT NULL,
   checked_out boolean DEFAULT false NOT NULL,
+  checked_out_by int,
   reprocessing_error text,
   entry_error text,
   entry_time timestamp without time zone DEFAULT (now() at time zone 'utc'),
@@ -82,6 +83,7 @@ CREATE TABLE ethcl.historic_process (
   start_slot bigint NOT NULL,
   end_slot bigint NOT NULL,
   checked_out boolean DEFAULT false NOT NULL,
+  checked_out_by int,
   entry_time timestamp without time zone DEFAULT (now() at time zone 'utc'),
   priority int DEFAULT 10
 );
