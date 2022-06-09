@@ -72,7 +72,8 @@ CREATE TABLE ethcl.known_gaps (
   reprocessing_error text,
   entry_error text,
   entry_time timestamp without time zone DEFAULT (now() at time zone 'utc'),
-  entry_process text
+  entry_process text,
+  priority int DEFAULT 10
 );
 
 --

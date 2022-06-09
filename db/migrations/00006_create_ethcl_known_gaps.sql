@@ -9,6 +9,7 @@ CREATE TABLE ethcl.known_gaps(
   entry_error text,
   entry_time timestamp without time zone DEFAULT (now() at time zone 'utc'),
   entry_process text,
+  priority int DEFAULT 10,
   PRIMARY KEY (start_slot, end_slot)
 );
 
