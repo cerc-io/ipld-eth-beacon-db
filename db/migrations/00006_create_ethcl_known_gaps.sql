@@ -1,6 +1,6 @@
 
 -- +goose Up
-CREATE TABLE ethcl.known_gaps(
+CREATE TABLE eth_beacon.known_gaps(
   start_slot bigint NOT NULL,
   end_slot bigint NOT NULL,
   checked_out boolean DEFAULT false NOT NULL,
@@ -14,4 +14,4 @@ CREATE TABLE ethcl.known_gaps(
 );
 
 -- +goose Down
-DROP TABLE ethcl.known_gaps;
+DROP TABLE eth_beacon.known_gaps;

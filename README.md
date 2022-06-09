@@ -1,2 +1,3 @@
-# ipld-ethcl-db
-Schemas and utils for IPLD ETHCL Postgres database
+# ipld-eth-beacon-db
+
+Schemas and utils for IPLD Eth Postgres database.

@@ -115,7 +115,7 @@ import:
 ## Build docker image with schema
 .PHONY: docker-build
 docker-build:
-	docker build -t vulcanize/ipld-ethcl-db .
+	docker build -t vulcanize/ipld-eth-beacon-db .
 
 ## Build docker image for migration
 .PHONY: docker-concise-migration-build

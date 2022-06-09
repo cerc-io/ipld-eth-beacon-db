@@ -1,5 +1,5 @@
 -- +goose Up
-CREATE SCHEMA ethcl;
+CREATE SCHEMA eth_beacon;
 
 -- +goose Down
-DROP SCHEMA ethcl;
+DROP SCHEMA eth_beacon;

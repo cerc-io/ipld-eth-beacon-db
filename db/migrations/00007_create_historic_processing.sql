@@ -1,6 +1,6 @@
 
 -- +goose Up
-CREATE TABLE ethcl.historic_process (
+CREATE TABLE eth_beacon.historic_process (
   start_slot bigint NOT NULL,
   end_slot bigint NOT NULL,
   checked_out boolean DEFAULT false NOT NULL,
@@ -11,4 +11,4 @@ CREATE TABLE ethcl.historic_process (
 );
 
 -- +goose Down
-DROP TABLE ethcl.historic_process;
+DROP TABLE eth_beacon.historic_process;

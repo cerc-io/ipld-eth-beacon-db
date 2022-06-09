@@ -1,5 +1,5 @@
 -- +goose Up
-CREATE TABLE ethcl.slots (
+CREATE TABLE eth_beacon.slots (
   epoch bigint NOT NULL,
   slot bigint NOT NULL,
   block_root VARCHAR(66),
@@ -9,7 +9,7 @@ CREATE TABLE ethcl.slots (
   PRIMARY KEY (block_root, slot)
 );
 
-CREATE INDEX slots_slot_index ON ethcl.slots USING brin (slot);
+CREATE INDEX slots_slot_index ON eth_beacon.slots USING brin (slot);
 
 -- +goose Down
-DROP TABLE ethcl.slots;
+DROP TABLE eth_beacon.slots;
