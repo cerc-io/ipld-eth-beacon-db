@@ -17,7 +17,7 @@ installtools: | $(GOOSE)
 #Database
 HOST_NAME = localhost
 PORT = 5432
-NAME =
+NAME = postgres
 USER = postgres
 PASSWORD = password
 CONNECT_STRING=postgresql://$(USER):$(PASSWORD)@$(HOST_NAME):$(PORT)/$(NAME)?sslmode=disable
