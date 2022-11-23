@@ -19,7 +19,7 @@ jobs:
         run: docker tag vulcanize/ipld-eth-beacon-db docker.pkg.github.com/vulcanize/ipld-eth-beacon-db/ipld-eth-beacon-db:${{steps.vars.outputs.sha}}
       - name: Tag docker image
         run: docker tag docker.pkg.github.com/vulcanize/ipld-eth-beacon-db/ipld-eth-beacon-db:${{steps.vars.outputs.sha}} docker.pkg.github.com/vulcanize/ipld-eth-beacon-db/ipld-eth-beacon-db:${{steps.vars.outputs.tag}}
-git st      - name: Docker Push
+      - name: Docker Push
         run: docker push docker.pkg.github.com/vulcanize/ipld-eth-beacon-db/ipld-eth-beacon-db:${{steps.vars.outputs.sha}}
       - name: Docker Push to Docker Hub
         run: docker push docker.pkg.github.com/vulcanize/ipld-eth-beacon-db/ipld-eth-beacon-db:${{steps.vars.outputs.tag}}
