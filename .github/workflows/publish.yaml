@@ -18,10 +18,8 @@ jobs:
       - name: Tag docker image
         run: docker tag vulcanize/ipld-eth-beacon-db docker.pkg.github.com/vulcanize/ipld-eth-beacon-db/ipld-eth-beacon-db:${{steps.vars.outputs.sha}}
       - name: Tag docker image
-        run: docker tag docker.pkg.github.com/vulcanize/ipld-eth-beacon-db/ipld-eth-beacon-db:${{steps.vars.outputs.sha}} vulcanize/ipld-eth-beacon-db:${{steps.vars.outputs.tag}}
-      - name: Docker Login
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com -u vulcanize --password-stdin
-      - name: Docker Push
+        run: docker tag docker.pkg.github.com/vulcanize/ipld-eth-beacon-db/ipld-eth-beacon-db:${{steps.vars.outputs.sha}} docker.pkg.github.com/vulcanize/ipld-eth-beacon-db/ipld-eth-beacon-db:${{steps.vars.outputs.tag}}
+git st      - name: Docker Push
         run: docker push docker.pkg.github.com/vulcanize/ipld-eth-beacon-db/ipld-eth-beacon-db:${{steps.vars.outputs.sha}}
       - name: Docker Push to Docker Hub
-        run: docker push vulcanize/ipld-eth-beacon-db:${{steps.vars.outputs.tag}}
+        run: docker push docker.pkg.github.com/vulcanize/ipld-eth-beacon-db/ipld-eth-beacon-db:${{steps.vars.outputs.tag}}
